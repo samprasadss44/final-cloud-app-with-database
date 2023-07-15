@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 # <HINT> Import any new Models here
-from .models import Course, Enrollment
+from .models import Course, Enrollment, Submission, Choice
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
@@ -86,6 +86,9 @@ class CourseListView(generic.ListView):
 
 class CourseDetailView(generic.DetailView):
     model = Course
+    print("hello",model.pub_date)
+
+    context = {'course': Course}
     template_name = 'onlinecourse/course_detail_bootstrap.html'
 
 
@@ -151,4 +154,4 @@ def show_exam_result(request, course_id, submission_id):
         # Add more context variables as needed
     }
 
-    return render(request, 'onlinecourse/exam_result.html', context)
+    return render(request, 'onlinecourse/exam_result_bootstrap.html', context)
